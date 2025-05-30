@@ -15,9 +15,13 @@ public class LoginController {
     private final String AUTH_URL = "http://localhost:8081/api/auth/login";
 
     @GetMapping("/")
-    public String home() {
+    public String home(HttpSession session) {
+        if (session.getAttribute("usuario") != null) {
+            return "redirect:/dashboard";
+        }
         return "redirect:/login";
     }
+
 
     @GetMapping("/login")
     public String mostrarFormularioLogin() {

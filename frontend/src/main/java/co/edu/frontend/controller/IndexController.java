@@ -7,10 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class IndexController {
 
-    @GetMapping("/")
-    public String home(HttpSession session, Model model) {
+    @GetMapping("/index")
+    public String index(HttpSession session, Model model) {
         LoginResponse usuario = (LoginResponse) session.getAttribute("usuario");
 
         if (usuario != null) {
