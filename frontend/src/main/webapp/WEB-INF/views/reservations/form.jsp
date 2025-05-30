@@ -1,25 +1,18 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
-<head>
-    <title>Nueva Reserva</title>
-</head>
+<head><title>Crear Reserva</title></head>
 <body>
-<h2>Crear Reserva</h2>
-<form action="/reservations/save" method="post">
-
-    <label for="startDate">Fecha/Hora Inicio:</label>
-    <input type="datetime-local" name="startDate" required /><br/>
-
-    <label for="endDate">Fecha/Hora Fin:</label>
-    <input type="datetime-local" name="endDate" required /><br/>
-
-    <label for="subjectId">ID de la Materia (opcional):</label>
-    <input type="text" name="subjectId" /><br/>
-
-    <label for="purpose">Propósito:</label>
-    <input type="text" name="purpose" required /><br/>
-
+<h2>Formulario Reserva</h2>
+<form action="${pageContext.request.contextPath}/reservations/save" method="post">
+    Fecha Inicio: <input type="datetime-local" name="startDate" required/><br/>
+    Fecha Fin: <input type="datetime-local" name="endDate" required/><br/>
+    Tipo de Sala:
+    <select name="roomType">
+        <option value="CLASSROOM">Aula</option>
+        <option value="LABORATORY">Laboratorio</option>
+        <option value="AUDITORIUM">Auditorio</option>
+    </select><br/>
     <button type="submit">Guardar</button>
 </form>
+<a href="${pageContext.request.contextPath}/reservations">Volver a lista</a>
 </body>
 </html>

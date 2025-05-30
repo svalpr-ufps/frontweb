@@ -1,38 +1,43 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
-<head><title>Formulario Estudiante</title></head>
+<head>
+    <title>Formulario Estudiante</title>
+</head>
 <body>
-<h2>Formulario de Estudiante</h2>
-<form action="${pageContext.request.contextPath}/students/guardar" method="post">
-    <label>Código:</label>
-    <input type="text" name="studentCode" value="${student.studentCode}" required/><br/>
+<h1>${studentCode == null ? 'Nuevo Estudiante' : 'Editar Estudiante'}</h1>
+
+<form:form method="post"
+           modelAttribute="student"
+           action="${studentCode == null ?
+                   pageContext.request.contextPath + '/students/guardar' :
+                   pageContext.request.contextPath + '/students/actualizar/' + studentCode}">
 
     <label>Nombre:</label>
-    <input type="text" name="firstName" value="${student.firstName}" required/><br/>
+    <form:input path="firstName" /><br/>
 
     <label>Apellido:</label>
-    <input type="text" name="lastName" value="${student.lastName}" required/><br/>
+    <form:input path="lastName" /><br/>
 
     <label>Email:</label>
-    <input type="email" name="email" value="${student.email}" required/><br/>
+    <form:input path="email" /><br/>
 
     <label>Teléfono:</label>
-    <input type="text" name="phone" value="${student.phone}" /><br/>
+    <form:input path="phone" /><br/>
 
     <label>Fecha de Nacimiento:</label>
-    <input type="date" name="birthDate" value="${student.birthDate}" /><br/>
+    <form:input path="birthDate" type="date" /><br/>
 
-    <label>Contraseña:</label>
-    <input type="password" name="password" /><br/>
+    <label>Fecha de Ingreso:</label>
+    <form:input path="enrollmentDate" type="date" /><br/>
 
-    <label>Fecha de Inscripción:</label>
-    <input type="date" name="enrollmentDate" value="${student.enrollmentDate}" /><br/>
+    <label>Código de Estudiante:</label>
+    <form:input path="studentCode" /><br/>
 
-    <label>ID de Rol:</label>
-    <input type="text" name="roleId" value="${student.roleId}" /><br/>
+    <button type="submit">Guardar</button>
+</form:form>
 
-    <input type="submit" value="Guardar" />
-</form>
 <a href="${pageContext.request.contextPath}/students">Volver</a>
 </body>
 </html>

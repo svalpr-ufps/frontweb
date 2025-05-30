@@ -9,6 +9,6 @@ public class GradeRequest {
     private String courseCode;
     private String courseName;
     private String period;
-    private Double value;
+    private double value;
     private String comments;
 }

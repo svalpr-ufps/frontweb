@@ -1,49 +1,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
-    <title>Subject Form</title>
+    <title>Formulario de Materia</title>
 </head>
 <body>
-<h2>${subject.id == null ? 'Create Subject' : 'Edit Subject'}</h2>
+<h1>Formulario de Materia</h1>
+<form action="${pageContext.request.contextPath}/subjects/save" method="post">
+    <input type="hidden" name="id" value="${subject.id}" />
 
-<form:form modelAttribute="subject" method="post"
-           action="${pageContext.request.contextPath}/subjects/${subject.id == null ? 'save' : 'update/' += subject.id}">
-    <table>
-        <tr>
-            <td>Code:</td>
-            <td><form:input path="code"/></td>
-        </tr>
-        <tr>
-            <td>Name:</td>
-            <td><form:input path="name"/></td>
-        </tr>
-        <tr>
-            <td>Schedule:</td>
-            <td><form:input path="schedule"/></td>
-        </tr>
-        <tr>
-            <td>Classroom:</td>
-            <td><form:input path="classroom"/></td>
-        </tr>
-        <tr>
-            <td>Capacity:</td>
-            <td><form:input path="capacity" type="number"/></td>
-        </tr>
-        <tr>
-            <td>Course ID:</td>
-            <td><form:input path="courseId"/></td>
-        </tr>
-        <tr>
-            <td>Teacher ID:</td>
-            <td><form:input path="teacherId"/></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Save"/></td>
-        </tr>
-    </table>
-</form:form>
+    Código: <input type="text" name="code" value="${subject.code}" /><br/>
+    Nombre: <input type="text" name="name" value="${subject.name}" /><br/>
+    Horario: <input type="text" name="schedule" value="${subject.schedule}" /><br/>
+    Aula: <input type="text" name="classroom" value="${subject.classroom}" /><br/>
+    Capacidad: <input type="number" name="capacity" value="${subject.capacity}" /><br/>
+    Créditos: <input type="number" name="credits" value="${subject.credits}" /><br/>
 
-<a href="${pageContext.request.contextPath}/subjects">Back to list</a>
+    Curso (UUID): <input type="text" name="courseId" value="${subject.courseId}" /><br/>
+    Profesor (UUID): <input type="text" name="teacherId" value="${subject.teacherId}" /><br/>
+
+    Recursos (IDs separados por coma):
+    <input type="text" name="resourceIds" value="${subject.resourceIds}" /><br/>
+
+    <input type="submit" value="Guardar" />
+</form>
+<a href="${pageContext.request.contextPath}/subjects">Volver a la lista</a>
 </body>
 </html>

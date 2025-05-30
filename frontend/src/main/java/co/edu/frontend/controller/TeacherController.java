@@ -82,4 +82,11 @@ public class TeacherController {
         model.addAttribute("teacher", teacher);
         return "teacher/details";
     }
+    @PostMapping("/{teacherId}/assign-subject")
+    public String asignarMateria(@PathVariable UUID teacherId, @RequestParam UUID subjectId) {
+        RestTemplate rest = new RestTemplate();
+        rest.postForEntity(API_BASE + "/" + teacherId + "/assign-subject/" + subjectId, null, TeacherResponse.class);
+        return "redirect:/teachers/view/" + teacherId;
+    }
+
 }

@@ -1,29 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
+<a href="${pageContext.request.contextPath}/">Inicio</a>
+
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="<c:url value='/css/styles.css' />" />
-</head>
+<head><title>Login</title></head>
 <body>
-<div class="container">
-    <h2>Iniciar Sesión</h2>
-    <form method="post" action="/login">
-        <div class="form-group">
-            <label for="usuario">Usuario:</label>
-            <input type="text" name="usuario" id="usuario" required />
-        </div>
-        <div class="form-group">
-            <label for="clave">Contraseña:</label>
-            <input type="password" name="clave" id="clave" required />
-        </div>
-        <button type="submit" class="login-button">Ingresar</button>
-    </form>
-    <c:if test="${not empty error}">
-        <p class="error-message">${error}</p>
-    </c:if>
-</div>
+<h2>Iniciar Sesión</h2>
+<form method="post" action="${pageContext.request.contextPath}/login">
+    <label>Correo:</label>
+    <input type="text" name="usuario" required><br/>
+    <label>Clave:</label>
+    <input type="password" name="clave" required><br/>
+    <input type="submit" value="Ingresar">
+</form>
+<br/>
+<c:if test="${not empty error}">
+    <p style="color:rgba(19,207,212,0.93)">${error}</p>
+</c:if>
 </body>
 </html>

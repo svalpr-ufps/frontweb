@@ -1,11 +1,9 @@
 package co.edu.frontend.model;
 
-public class LoginRequest {
-    private String usuario;
-    private String clave;
+import lombok.Data;
 
-    public String getUsuario() { return usuario; }
-    public void setUsuario(String usuario) { this.usuario = usuario; }
-    public String getClave() { return clave; }
-    public void setClave(String clave) { this.clave = clave; }
+@Data
+public class LoginRequest {
+    private String usuario;  // corresponde a "email" en backend
+    private String clave;    // corresponde a "password" en backend
 }

@@ -1,21 +1,16 @@
 package co.edu.frontend.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import java.time.LocalDate;
-import java.util.UUID;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class StudentResponse {
-    private UUID id;
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
     private String phone;
-    private LocalDate birthDate;
-    private String status;
+    private String birthDate;
+    private String enrollmentDate;
     private String studentCode;
-    private LocalDate enrollmentDate;
-    private String roleName;
+    private String status;
 }

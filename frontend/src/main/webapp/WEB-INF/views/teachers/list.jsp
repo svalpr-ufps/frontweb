@@ -1,35 +1,31 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Listado de Profesores</title>
+    <title>Lista de Docentes</title>
 </head>
 <body>
-<h2>Listado de Profesores</h2>
-<a href="/teachers/create">Crear Nuevo</a>
+<h1>Lista de Docentes</h1>
+<a href="${pageContext.request.contextPath}/teachers/create">Nuevo Docente</a>
 <table border="1">
     <thead>
     <tr>
-        <th>Código</th>
         <th>Nombre</th>
         <th>Email</th>
         <th>Especialización</th>
-        <th>Fecha de Creación</th>
         <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${teachers}" var="t">
+    <c:forEach var="teacher" items="${teachers}">
         <tr>
-            <td>${t.teacherCode}</td>
-            <td>${t.firstName} ${t.lastName}</td>
-            <td>${t.email}</td>
-            <td>${t.specialization}</td>
-            <td>${t.createdAt}</td>
+            <td>${teacher.firstName} ${teacher.lastName}</td>
+            <td>${teacher.email}</td>
+            <td>${teacher.specialization}</td>
             <td>
-                <a href="/teachers/view/${t.id}">Ver</a> |
-                <a href="/teachers/edit/${t.id}">Editar</a> |
-                <a href="/teachers/delete/${t.id}">Eliminar</a>
+                <a href="${pageContext.request.contextPath}/teachers/view/${teacher.id}">Ver</a> |
+                <a href="${pageContext.request.contextPath}/teachers/edit/${teacher.id}">Editar</a> |
+                <a href="${pageContext.request.contextPath}/teachers/delete/${teacher.id}" onclick="return confirm('¿Seguro que desea eliminar este docente?')">Eliminar</a>
             </td>
         </tr>
     </c:forEach>

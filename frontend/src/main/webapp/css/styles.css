@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #6B73FF, #000DFF);
+    background: linear-gradient(135deg, #0accb1, #056565);
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -22,7 +22,7 @@ body {
 
 .container h2 {
     margin-bottom: 1.5rem;
-    color: #4A56E2;
+    color: #208162;
 }
 
 .form-group {
@@ -57,16 +57,16 @@ button,
 }
 
 .login-button {
-    background: #4A56E2;
+    background: #208162;
     color: #fff;
 }
 
 .login-button:hover {
-    background: #2b36c0;
+    background: #056565;
 }
 
 .logout-button {
-    background-color: #e74c3c;
+    background-color: #70074d;
     color: #fff;
     text-decoration: none;
     display: inline-block;
@@ -74,7 +74,7 @@ button,
 }
 
 .logout-button:hover {
-    background-color: #c0392b;
+    background-color: #50123d;
 }
 
 .error-message {
@@ -85,7 +85,7 @@ button,
 .message {
     font-size: 2rem;
     font-weight: bold;
-    color: #4A56E2;
+    color: #056565;
     margin-bottom: 1rem;
 }
 

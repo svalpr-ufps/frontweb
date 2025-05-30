@@ -12,4 +12,5 @@ public class MessageResponse {
     private String content;
     private LocalDateTime sentAt;
     private boolean isRead;
+
 }

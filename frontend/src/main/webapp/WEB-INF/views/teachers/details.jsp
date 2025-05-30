@@ -1,34 +1,33 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Detalles del Profesor</title>
+    <title>Detalles del Docente</title>
 </head>
 <body>
-<h2>Detalles del Profesor</h2>
+<h1>Detalles del Docente</h1>
 
-<p><strong>ID:</strong> ${teacher.id}</p>
-<p><strong>Código:</strong> ${teacher.teacherCode}</p>
 <p><strong>Nombre:</strong> ${teacher.firstName} ${teacher.lastName}</p>
 <p><strong>Email:</strong> ${teacher.email}</p>
 <p><strong>Especialización:</strong> ${teacher.specialization}</p>
-<p><strong>Fecha de Registro:</strong> ${teacher.createdAt}</p>
+<p><strong>Código:</strong> ${teacher.teacherCode}</p>
 
-<h3>Materias Asignadas</h3>
-<c:choose>
-    <c:when test="${not empty teacher.subjects}">
-        <ul>
-            <c:forEach items="${teacher.subjects}" var="s">
-                <li><strong>${s.code}</strong> - ${s.name}</li>
-            </c:forEach>
-        </ul>
-    </c:when>
-    <c:otherwise>
-        <p>No tiene materias asignadas.</p>
-    </c:otherwise>
-</c:choose>
+<!-- Asignar asignatura -->
+<form action="${pageContext.request.contextPath}/teachers/${teacher.id}/assign-subject" method="post">
+    <label>Asignar asignatura (UUID):</label>
+    <input type="text" name="subjectId" placeholder="UUID de la asignatura" required />
+    <button type="submit">Asignar</button>
+</form>
 
-<a href="/teachers">Volver al listado</a>
+<c:if test="${not empty teacher.subjects}">
+    <h3>Asignaturas Asignadas:</h3>
+    <ul>
+        <c:forEach var="subject" items="${teacher.subjects}">
+            <li>${subject}</li>
+        </c:forEach>
+    </ul>
+</c:if>
 
+<a href="${pageContext.request.contextPath}/teachers">Volver</a>
 </body>
 </html>

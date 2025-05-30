@@ -1,25 +1,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Subjects</title>
+    <title>Lista de Materias</title>
 </head>
 <body>
-<h2>Subjects</h2>
-<a href="${pageContext.request.contextPath}/subjects/create">Create New Subject</a>
+<h1>Materias</h1>
+<a href="${pageContext.request.contextPath}/subjects/form">Nueva Materia</a>
 <table border="1">
-    <thead>
     <tr>
-        <th>Code</th>
-        <th>Name</th>
-        <th>Schedule</th>
-        <th>Classroom</th>
-        <th>Capacity</th>
-        <th>Course</th>
-        <th>Teacher</th>
-        <th>Actions</th>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Horario</th>
+        <th>Aula</th>
+        <th>Capacidad</th>
+        <th>Créditos</th>
+        <th>Curso</th>
+        <th>Profesor</th>
+        <th>Acciones</th>
     </tr>
-    </thead>
-    <tbody>
     <c:forEach var="subject" items="${subjects}">
         <tr>
             <td>${subject.code}</td>
@@ -27,15 +25,16 @@
             <td>${subject.schedule}</td>
             <td>${subject.classroom}</td>
             <td>${subject.capacity}</td>
+            <td>${subject.credits}</td>
             <td>${subject.course.name}</td>
-            <td>${subject.teacher.name}</td>
+            <td>${subject.teacher.firstName} ${subject.teacher.lastName}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/subjects/details/${subject.id}">View</a>
-                <a href="${pageContext.request.contextPath}/subjects/edit/${subject.id}">Edit</a>
+                <a href="${pageContext.request.contextPath}/subjects/view/${subject.id}">Ver</a> |
+                <a href="${pageContext.request.contextPath}/subjects/form?id=${subject.id}">Editar</a> |
+                <a href="${pageContext.request.contextPath}/subjects/delete/${subject.id}" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
             </td>
         </tr>
     </c:forEach>
-    </tbody>
 </table>
 </body>
 </html>

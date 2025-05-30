@@ -2,22 +2,23 @@ package co.edu.frontend.controller;
 
 import co.edu.frontend.model.GradeRequest;
 import co.edu.frontend.model.GradeResponse;
-import jakarta.servlet.RequestDispatcher;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import org.springframework.http.*;
+import org.springframework.web.client.RestTemplate;
+
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 @WebServlet("/grades")
 public class GradeController extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-
-    // Simulación de lista temporal
-    private static List<GradeResponse> grades = new ArrayList<>();
+    private static final String API_URL = "http://localhost:8081/api/grades";
+    private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +27,13 @@ public class GradeController extends HttpServlet {
         if ("form".equals(action)) {
             req.getRequestDispatcher("/WEB-INF/views/grade/form.jsp").forward(req, resp);
         } else {
-            req.setAttribute("grades", grades);
+            String studentId = req.getParameter("studentId");
+            if (studentId != null && !studentId.isEmpty()) {
+                ResponseEntity<GradeResponse[]> response = restTemplate.getForEntity(
+                        API_URL + "/student/" + studentId, GradeResponse[].class);
+                List<GradeResponse> grades = Arrays.asList(response.getBody());
+                req.setAttribute("grades", grades);
+            }
             req.getRequestDispatcher("/WEB-INF/views/grade/list.jsp").forward(req, resp);
         }
     }
@@ -42,18 +49,12 @@ public class GradeController extends HttpServlet {
         request.setValue(Double.parseDouble(req.getParameter("value")));
         request.setComments(req.getParameter("comments"));
 
-        // Simulación de respuesta
-        GradeResponse response = new GradeResponse();
-        response.setId(UUID.randomUUID());
-        response.setStudentCode(request.getStudentCode());
-        response.setSubjectCode(request.getSubjectCode());
-        response.setSubjectName(request.getCourseName());
-        response.setPeriod(request.getPeriod());
-        response.setValue(request.getValue());
-        response.setStatus(request.getValue() >= 3.0 ? "APROBADO" : "REPROBADO");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-        grades.add(response);
+        HttpEntity<GradeRequest> entity = new HttpEntity<>(request, headers);
+        restTemplate.postForEntity(API_URL, entity, GradeResponse.class);
 
-        resp.sendRedirect("grades");
+        resp.sendRedirect("grades?studentId=" + request.getStudentCode());
     }
 }

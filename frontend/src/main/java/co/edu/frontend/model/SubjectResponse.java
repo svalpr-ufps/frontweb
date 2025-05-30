@@ -13,6 +13,7 @@ public class SubjectResponse {
     private String schedule;
     private String classroom;
     private Integer capacity;
+    private Integer credits;
     private CourseSimpleDTO course;
     private TeacherSimpleDTO teacher;
     private List<AcademicResourceSimpleDTO> resources;
@@ -22,6 +23,7 @@ public class SubjectResponse {
         private UUID id;
         private String code;
         private String name;
+        private Integer credits;
     }
 
     @Data

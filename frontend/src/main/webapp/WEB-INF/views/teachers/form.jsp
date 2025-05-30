@@ -1,30 +1,34 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Formulario de Profesor</title>
+    <title>${teacherId == null ? 'Crear Docente' : 'Editar Docente'}</title>
 </head>
 <body>
-<h2>Formulario de Profesor</h2>
-<form action="${teacherId == null ? '/teachers/save' : '/teachers/update/' + teacherId}" method="post">
+<h1>${teacherId == null ? 'Nuevo Docente' : 'Editar Docente'}</h1>
+
+<form:form method="post"
+           modelAttribute="teacher"
+           action="${teacherId == null ?
+                   pageContext.request.contextPath + '/teachers/save' :
+                   pageContext.request.contextPath + '/teachers/update/' + teacherId}">
+
     <label>Nombre:</label>
-    <input type="text" name="firstName" value="${teacher.firstName}" required/><br/>
+    <form:input path="firstName" /><br/>
 
     <label>Apellido:</label>
-    <input type="text" name="lastName" value="${teacher.lastName}" required/><br/>
+    <form:input path="lastName" /><br/>
 
     <label>Email:</label>
-    <input type="email" name="email" value="${teacher.email}" required/><br/>
-
-    <c:if test="${teacherId == null}">
-        <label>Contraseña:</label>
-        <input type="password" name="password" required/><br/>
-    </c:if>
+    <form:input path="email" type="email" /><br/>
 
     <label>Especialización:</label>
-    <input type="text" name="specialization" value="${teacher.specialization}" required/><br/>
+    <form:input path="specialization" /><br/>
 
     <button type="submit">Guardar</button>
-</form>
+</form:form>
+
+<a href="${pageContext.request.contextPath}/teachers">Volver</a>
 </body>
 </html>

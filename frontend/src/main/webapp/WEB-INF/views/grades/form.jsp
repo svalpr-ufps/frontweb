@@ -1,20 +1,17 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-<head>
-    <title>Registrar Calificación</title>
-</head>
+<head><title>Registrar Calificación</title></head>
 <body>
-<h2>Registrar Nueva Calificación</h2>
-<form action="grades" method="post">
-    <label>Código Estudiante: <input type="text" name="studentCode" required /></label><br/>
-    <label>Código Materia: <input type="text" name="subjectCode" required /></label><br/>
-    <label>Código Curso: <input type="text" name="courseCode" required /></label><br/>
-    <label>Nombre del Curso: <input type="text" name="courseName" required /></label><br/>
-    <label>Periodo: <input type="text" name="period" required /></label><br/>
-    <label>Nota: <input type="number" step="0.1" min="0" max="5" name="value" required /></label><br/>
-    <label>Comentarios: <textarea name="comments"></textarea></label><br/>
-    <input type="submit" value="Registrar" />
+<h2>Registrar Calificación</h2>
+<form action="${pageContext.request.contextPath}/grades" method="post">
+    <label>Código Estudiante:</label><input type="text" name="studentCode" required><br/>
+    <label>Código Asignatura:</label><input type="text" name="subjectCode" required><br/>
+    <label>Código Curso:</label><input type="text" name="courseCode"><br/>
+    <label>Nombre Curso:</label><input type="text" name="courseName"><br/>
+    <label>Periodo:</label><input type="text" name="period"><br/>
+    <label>Valor:</label><input type="number" step="0.1" name="value" required><br/>
+    <label>Comentarios:</label><input type="text" name="comments"><br/>
+    <input type="submit" value="Guardar">
 </form>
-<a href="grades">Volver a la lista</a>
 </body>
 </html>

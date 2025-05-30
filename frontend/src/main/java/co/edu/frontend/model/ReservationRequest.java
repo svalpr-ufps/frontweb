@@ -13,3 +13,4 @@ public class ReservationRequest {
     private UUID subjectId;
     private String purpose;
 }
+

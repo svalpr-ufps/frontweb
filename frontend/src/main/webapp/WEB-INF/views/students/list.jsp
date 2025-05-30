@@ -1,38 +1,40 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="co.edu.frontend.model.GradeResponse" %>
+<%@ page import="java.util.List" %>
 <html>
-<head><title>Listado de Estudiantes</title></head>
+<head><title>Listado de Calificaciones</title></head>
 <body>
-<h2>Estudiantes</h2>
-<a href="${pageContext.request.contextPath}/students/nuevo">Crear Nuevo</a>
+<h2>Listado de Calificaciones</h2>
+<a href="grades?action=form">Registrar Nueva</a><br/><br/>
+<form method="get" action="grades">
+    <label>Filtrar por ID Estudiante:</label>
+    <input type="text" name="studentId" required>
+    <input type="submit" value="Buscar">
+</form>
+<br/>
 <table border="1">
-    <thead>
     <tr>
-        <th>Código</th>
-        <th>Nombre</th>
-        <th>Email</th>
-        <th>Teléfono</th>
+        <th>Asignatura</th>
+        <th>Curso</th>
+        <th>Periodo</th>
+        <th>Nota</th>
         <th>Estado</th>
-        <th>Rol</th>
-        <th>Acciones</th>
     </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="student" items="${lista}">
-        <tr>
-            <td>${student.studentCode}</td>
-            <td>${student.firstName} ${student.lastName}</td>
-            <td>${student.email}</td>
-            <td>${student.phone}</td>
-            <td>${student.status}</td>
-            <td>${student.roleName}</td>
-            <td>
-                <a href="${pageContext.request.contextPath}/students/ver/${student.studentCode}">Ver</a> |
-                <a href="${pageContext.request.contextPath}/students/editar/${student.studentCode}">Editar</a> |
-                <a href="${pageContext.request.contextPath}/students/eliminar/${student.studentCode}">Eliminar</a>
-            </td>
-        </tr>
-    </c:forEach>
-    </tbody>
+    <%
+        List<GradeResponse> grades = (List<GradeResponse>) request.getAttribute("grades");
+        if (grades != null) {
+            for (GradeResponse g : grades) {
+    %>
+    <tr>
+        <td><%= g.getSubjectName() %></td>
+        <td><%= g.getPeriod() %></td>
+        <td><%= g.getValue() %></td>
+        <td><%= g.getStatus() %></td>
+    </tr>
+    <%
+            }
+        }
+    %>
 </table>
 </body>
 </html>

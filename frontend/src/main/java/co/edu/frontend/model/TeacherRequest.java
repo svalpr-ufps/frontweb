@@ -1,14 +1,11 @@
 package co.edu.frontend.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class TeacherRequest {
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
     private String specialization;
 }

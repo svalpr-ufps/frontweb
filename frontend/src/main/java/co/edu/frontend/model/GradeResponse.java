@@ -11,6 +11,6 @@ public class GradeResponse {
     private String subjectCode;
     private String subjectName;
     private String period;
-    private Double value;
+    private double value;
     private String status;
 }

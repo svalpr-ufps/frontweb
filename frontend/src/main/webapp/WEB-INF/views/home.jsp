@@ -1,16 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<a href="${pageContext.request.contextPath}/">Inicio</a>
+
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>JSP Demo</title>
-    <link rel="stylesheet" href="<c:url value='/css/styles.css' />" />
+    <title>Inicio - Kampus</title>
 </head>
 <body>
-<div class="container">
-    <div class="message"><c:out value="${message}"/></div>
-    <div class="description">Este es el resultado generado desde una página JSP.</div>
-</div>
+<h1>Bienvenido a Kampus</h1>
+
+<c:choose>
+    <c:when test="${not empty nombre}">
+        <p>Hola, <strong>${nombre}</strong> (${rol})</p>
+        <p><a href="dashboard">Ir al Panel</a> | <a href="logout">Cerrar sesión</a></p>
+    </c:when>
+    <c:otherwise>
+        <p><a href="login">Iniciar Sesión</a></p>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>
